@@ -1,5 +1,4 @@
 from django.db import models
-
 from core import settings
 from utils.upload import upload_instance
 
@@ -41,10 +40,8 @@ class Auction(models.Model):
     customer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Участник')
     car = models.ForeignKey(CarDetail, on_delete=models.CASCADE, verbose_name='Машина')
     price_after_step_up = models.CharField(verbose_name='Цена после повышения', max_length=255)
-        # f'{started_price}+{step_up_price}'
     step_up_price = models.CharField(verbose_name='Цена повышения', max_length=255)
     finished_price = models.CharField(verbose_name='Цена продажи', max_length=255)
-        # f'{price_after_step_up}'
     in_progress = models.BooleanField(default=False, verbose_name='Текущий аукцион')
     finished = models.BooleanField(default=False, verbose_name='Завершенный аукцион')
 

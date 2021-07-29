@@ -13,7 +13,8 @@ class CarRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
 
 class CarListApiView(generics.ListAPIView):
     permission_classes = (IsAuthenticated)
-    queryset = CarDetail.objects.all()
+    serializer_class = CarDetailSerializer
+    queryset = CarDetail.objects.all().order_by('finished')[:5]
 
 
 class SubmitApplicationCreateModelMixin(generics.CreateAPIView):
@@ -29,4 +30,4 @@ class AuctionCreateModelMixin(generics.CreateAPIView):
 
 class AuctionListView(generics.ListAPIView):
     permission_classes = (IsAuthenticated)
-    queryset = Auction.objects.all()
+    queryset = Auction.objects.filter(customer__user_check_accepted=True).order_by('in_progress')
